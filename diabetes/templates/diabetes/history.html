@@ -1,0 +1,52 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>History</title>
+    <meta name="description" content="description"/>
+    <meta name="author" content="author" />
+    <meta name="keywords" content="keywords" />
+    <link rel="stylesheet" href="{% static 'history.css' %}" type="text/css" />
+    <style type="text/css">.body { width: auto; }</style>
+  </head>
+  <body>
+
+    <main>
+        <ul class="menu_items">
+          <li><a href="/diabetes/profile/" class="">Home</a></li>
+          <li><a href="/diabetes/profile/logout" class="">LogOut</a></li>
+        </ul>
+    <div class="container">
+
+      <div class="table">
+        <div class="table-header">
+          <div class="header__item"><a id="pregnancies" class="filter__link" href="#">Pregnancies</a></div>
+          <div class="header__item"><a id="glucose" class="filter__link filter__link--number" href="#">Glucose</a></div>
+          <div class="header__item"><a id="bp" class="filter__link filter__link--number" href="#">BloodPressure</a></div>
+          <div class="header__item"><a id="st" class="filter__link filter__link--number" href="#">SkinThickness</a></div>
+          <div class="header__item"><a id="insulin" class="filter__link filter__link--number" href="#">Insulin</a></div>
+          <div class="header__item"><a id="bmi" class="filter__link filter__link--number" href="#">BMI</a></div>
+          <div class="header__item"><a id="age" class="filter__link filter__link--number" href="#">Age</a></div>
+          <div class="header__item"><a id="dpf" class="filter__link filter__link--number" href="#">DiabetesPedigreeFunction</a></div>
+          <div class="header__item"><a id="result" class="filter__link filter__link--number" href="#">Result</a></div>
+        </div>
+        <div class="table-content">	
+          {% for dia in diabetes %}
+          <div class="table-row">		
+            <div class="table-data">{{dia.Pregnancies}}</div>
+            <div class="table-data">{{dia.Glucose}}</div>
+            <div class="table-data">{{dia.BloodPressure}}</div>
+            <div class="table-data">{{dia.SkinThickness}}</div>
+            <div class="table-data">{{dia.BMI}}</div>
+            <div class="table-data">{{dia.Age}}</div>
+            <div class="table-data">{{dia.DiabetesPedigreeFunction}}</div>
+            <div class="table-data">{{dia.Insulin}}</div>
+            <div class="table-data">{{dia.Result}}</div>
+          </div>
+          {% endfor %}
+        </div>	
+      </div>
+    </div>
+  </body>
+</html>

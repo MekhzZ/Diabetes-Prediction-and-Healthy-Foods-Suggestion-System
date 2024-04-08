@@ -1,0 +1,96 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous" />
+    <link href="{% static 'calorie_calc.css' %}" rel="stylesheet" type="text/css" />
+    <title>Healthy foods Suggestion</title>
+</head>
+
+<body>
+  <header>
+    <nav class="nav container">
+
+      <ul class="menu_items">
+        <li><a href="/diabetes/profile/" class="">Home</a></li>
+        <li><a href="logout" class="">LogOut</a></li>
+      </ul>
+
+    </nav>
+  </header>
+
+    <div class="container">
+  
+
+        <div class="row justify-content-center">
+            <div class="col-md-8 text-center">
+                <img src="{% static 'images/Logo.png' %}" class=" img-responsive logo mb-5 mt-5" />
+                <form method='POST'>
+                  {% csrf_token %}
+                    <div class="input-group input-group-lg mb-5">
+                        <input type="text" name="query" class="form-control inputstyle"
+                            placeholder="search for calories in your food..." required>
+                        <button class="btn whoop" type="submit" id="button-addon2">Find calories</button>
+                    </div>
+                </form>
+              {% if food %}
+              {% if food == "oops! There was an error" %}
+                <div class="alert alert-warning"> Oh no! something went wrong.Please try again in sometime. </div>
+              {% else %}
+                <h1> {{food.0.name}} has a total of <strong> {{food.0.calories}} Calories</strong>
+
+                </h1>
+              {% if food.0.sodium_mg > 600 %}
+
+                <div class="alert alert-danger d-flex align-items-center mt-3" role="alert">
+
+                    <div>
+                        This food contains an high amount of sodium. High Sodium cuases Sever dehydration and water
+                        retention.
+                    </div>
+                  {% endif %}
+                  {% if food.0.sugar_g > 25 %}
+
+                  <div class="alert alert-danger d-flex align-items-center mt-3" role="alert">
+
+                      <div>
+                          This food contains a high amount of sugar. High sugar causes Diabetes.
+                      </div>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="row justify-content-center mt-5 mb-5">
+                <div class="col-md-6 caloriescont shadow rounded">
+                    <div >
+
+                        <div >
+                            <h2 class="mt-4 mb-4">Nutritional Values </h2><span></span>
+                            <ul>
+                                <li class="servingsize">Serving Size per 100/Grams <span class="float-end"></span></li>
+                                <li>Carbohydrates: <span class="float-end">{{food.0.carbohydrates_total_g}}</span>
+                                </li>
+                                <li>Cholesterol: <span class="float-end">{{food.0.cholesterol_mg}}</span></li>
+                                <li>Saturated fat: <span class="float-end">{{food.0.fat_saturated_g}}</span></li>
+                                <li>Total Fat: <span class="float-end">{{food.0.fat_total_g}}</span></li>
+                                <li>Fiber Content: <span class="float-end">{{food.0.fiber_g}}</span></li>
+                                <li>Potassium <span class="float-end">{{food.0.potassium_mg}}</span></li>
+                                <li>Protein: <span class="float-end">{{food.0.protein_g}}<span></li>
+                                <li>Sodium:<span class="float-end">{{food.0.sodium_mg}}</span></li>
+                                <li>Sugar: <span class="float-end">{{food.0.sugar_g}}</span></li>
+                            </ul>
+                        </div>
+                        
+                    </div>
+                </div>
+                                  {% endif %}
+                                  {% endif %}
+              </div>
+
+</body>
+
+</html>
